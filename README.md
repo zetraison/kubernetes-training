@@ -2,17 +2,13 @@
 
 Create a Kubernetes cluster with Vagrant and VirtualBox.
 
-This is meant as a cost-free alternative to the excellent tutorial
-[Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way),
-while being slightly more real than [Minikube](https://github.com/kubernetes/minikube).
-
 ## Prerequisites
 
 Last tested with:
 
-- Vagrant 2.2.2
-- VirtualBox 5.2.22
-- [kubectl 1.12](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- Vagrant 2.2.3
+- VirtualBox 6.0
+- [kubectl 1.13.1](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Setting up a Kubernetes cluster
 
@@ -50,9 +46,6 @@ k8s-master     Ready      master    48s       v1.9.1
 k8s-worker-0   Ready      <none>    29s       v1.9.1
 k8s-worker-1   Ready      <none>    23s       v1.9.1
 ```
-
-Then perform some smoke tests like using your local `kubectl` to run a container as done here:
-<https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/13-smoke-test.md>
 
 ### Destroy machines
 
