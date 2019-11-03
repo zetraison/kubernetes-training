@@ -8,7 +8,7 @@ Last tested with:
 
 - Vagrant 2.2.3
 - VirtualBox 6.0
-- [kubectl 1.13.1](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [kubectl 1.16.2](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Setting up a Kubernetes cluster
 

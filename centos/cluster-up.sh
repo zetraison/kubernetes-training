@@ -21,7 +21,7 @@ vagrant ssh k8s-master -c "source /tmp/kubeadm-master-start"
 vagrant ssh k8s-master -c "kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml"
 
 # Get the join command for the workers
-vagrant ssh k8s-master -c "grep 'kubeadm join' /tmp/kubeadm-init" > kubeadm-join
+vagrant ssh k8s-master -c "kubeadm token create --print-join-command" > kubeadm-join
 
 # Execute the join command on the workers
 array=()

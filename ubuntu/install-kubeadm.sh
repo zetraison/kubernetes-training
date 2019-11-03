@@ -1,5 +1,20 @@
 apt-get update
 apt-get install -y docker.io
+
+# Setup daemon.
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+mkdir -p /etc/systemd/system/docker.service.d
+
 sudo usermod -a -G docker vagrant
 
 sudo sed -i "/$(hostname)/d" /etc/hosts
@@ -27,4 +42,6 @@ apt-get update
 apt-get install -y kubelet kubeadm kubectl
 
 systemctl enable kubelet
+systemctl daemon-reload
 systemctl enable docker
+systemctl restart docker
