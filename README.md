@@ -1,12 +1,12 @@
 # kubernetes-training
 
-Create a Kubernetes cluster with Vagrant and VirtualBox.
+Create a Kubernetes cluster with Vagrant, Ansible and VirtualBox.
 
 ## Prerequisites
 
 Last tested with:
 
-- Vagrant 2.2.3
+- Vagrant 2.2.6
 - VirtualBox 6.0
 - [kubectl 1.16.2](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
@@ -17,7 +17,7 @@ Choose one of the OS directories.
 The `Vagrantfile` can be used to start VMs for a Kubernetes cluster:
 
 - One master, `k8s-master`
-- Two workers, `k8s-worker-0` and `k8s-worker-1`
+- Two workers, `k8s-node-0` and `k8s-node-1`
 
 ### Create and provision machines
 
@@ -43,8 +43,8 @@ cp -i config ~/.kube/
 $ kubectl get nodes
 NAME           STATUS     ROLES     AGE       VERSION
 k8s-master     Ready      master    48s       v1.9.1
-k8s-worker-0   Ready      <none>    29s       v1.9.1
-k8s-worker-1   Ready      <none>    23s       v1.9.1
+k8s-node-0     Ready      <none>    29s       v1.9.1
+k8s-node-1     Ready      <none>    23s       v1.9.1
 ```
 
 ### Destroy machines
