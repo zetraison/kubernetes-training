@@ -3,9 +3,36 @@ yum update
 yum install -y git
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 # docker 18.09.0 not validated by kube 1.13.1
-yum install -y docker-ce-18.06.1.ce
+yum install -y docker-ce-18.06.2.ce
+
+# Grant vagrant user to docker group
 sudo usermod -a -G docker vagrant
-systemctl enable docker
+
+## Create /etc/docker directory.
+mkdir /etc/docker
+
+# Setup daemon.
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
+EOF
+
+mkdir -p /etc/systemd/system/docker.service.d
+
+# Enable docker services
+systemctl enable docker.service
+
+# Restart Docker
+systemctl daemon-reload
 systemctl start docker
 #######
 
@@ -40,7 +67,7 @@ EOF
 setenforce 0
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-yum install -y kubelet-1.13-1 kubeadm-1.13.1 kubectl-1.13.1 --disableexcludes=kubernetes
+yum install -y kubelet-1.16-2 kubeadm-1.16.2 kubectl-1.16.2 --disableexcludes=kubernetes
 
 systemctl enable kubelet && systemctl start kubelet
 #######
